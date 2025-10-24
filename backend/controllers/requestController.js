@@ -29,7 +29,7 @@ const requestAmount = asyncHandler(async (req, res) => {
       await request.save()
       await User.findByIdAndUpdate(
         receiver,
-        { $inc: { requestReceived: 1 } },
+        { Rsinc: { requestReceived: 1 } },
         { new: true }
       )
       res.status(201).json(request)
@@ -112,12 +112,12 @@ const updateRequestStats = asyncHandler(async (req, res) => {
 
       // deduct the amount from the sender
       await User.findByIdAndUpdate(sender, {
-        $inc: { balance: -amount },
+        Rsinc: { balance: -amount },
       })
 
       // add the amount to the receiver
       await User.findByIdAndUpdate(receiver, {
-        $inc: { balance: amount },
+        Rsinc: { balance: amount },
       })
       res.status(201).json(transaction)
 

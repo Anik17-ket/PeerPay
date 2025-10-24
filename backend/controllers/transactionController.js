@@ -34,19 +34,19 @@ const transferAmount = asyncHandler(async (req, res) => {
     })
     await transfer.save()
     await User.findByIdAndUpdate(sender, {
-      $inc: { balance: -amount },
+      Rsinc: { balance: -amount },
     })
     await User.findByIdAndUpdate(receiver, {
-      $inc: { balance: amount },
+      Rsinc: { balance: amount },
     })
     await User.findByIdAndUpdate(
       sender,
-      { $inc: { moneySend: 1 } },
+      { Rsinc: { moneySend: 1 } },
       { new: true }
     )
     await User.findByIdAndUpdate(
       receiver,
-      { $inc: { moneyReceived: 1 } },
+      { Rsinc: { moneyReceived: 1 } },
       { new: true }
     )
 
@@ -93,7 +93,7 @@ const getTransactions = asyncHandler(async (req, res) => {
   const { id } = req.params
   console.log(id)
   const transactions = await Transaction.find({
-    $or: [{ sender: id }, { receiver: id }],
+    or: [{ sender: id }, { receiver: id }],
   })
     .sort({ createdAt: -1 })
     .populate([
@@ -162,10 +162,10 @@ const deposit = asyncHandler(async (req, res) => {
     // await transaction.save()
     await User.findByIdAndUpdate(
       user._id,
-      { $inc: { balance: amount } },
+      { Rsinc: { balance: amount } },
       { new: true }
     )
-    res.status(200).json({ msg: `$${amount} added to your account` })
+    res.status(200).json({ msg: `Rs${amount} added to your account` })
   } else {
     res.status(400)
     throw new Error('user not found')
