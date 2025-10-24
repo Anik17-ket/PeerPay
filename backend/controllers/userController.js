@@ -21,6 +21,8 @@ const register = asyncHandler(async (req, res) => {
     requestReceived,
   } = req.body
 
+ 
+
   if (
     !name ||
     !email ||
@@ -34,6 +36,7 @@ const register = asyncHandler(async (req, res) => {
   }
 
   // Check if user exists
+
   const userExists = await User.findOne({ email })
 
   if (userExists) {
